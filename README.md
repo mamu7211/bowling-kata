@@ -4,8 +4,8 @@ Bowling Kata
 Build
 -----
 
-To build the project from command line, type "mvn package" or "mvn clean compile assembly:single".
-Test can be run with "mvn test".
+You'll need Maven 3 to build the jar file. To build the project from command line, cd to the "./bowling-kata-master/game" directory. There you'll find the projects pom.
+Type "mvn package" or "mvn clean compile assembly:single". Test can be run with "mvn test", there should be 100 non failing tests.
 
 Run
 ---
