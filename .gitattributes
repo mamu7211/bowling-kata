@@ -1,0 +1,63 @@
+############################################################################
+# General Attributes 
+# see following links for more information on .gitattributes
+# http://git-scm.com/book/ch7-2.html
+# http://davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
+############################################################################
+
+# Auto detect text files and perform LF normalization ----------------------
+* text=auto
+
+# Text Files ---------------------------------------------------------------
+
+*.xml text
+
+############################################################################
+# Java & Eclipse
+############################################################################
+
+# Text Files ---------------------------------------------------------------
+
+*.java text
+*.properties text
+
+# Binaries -----------------------------------------------------------------
+
+*.jar binary
+
+############################################################################
+# .Net & Visual Studio
+############################################################################
+
+# Custom for Visual Studio -------------------------------------------------
+
+# Text Files ---------------------------------------------------------------
+
+*.cs diff=csharp
+*.sln merge=union
+*.csproj merge=union
+*.vbproj merge=union
+*.fsproj merge=union
+*.dbproj merge=union
+
+# Binaries -----------------------------------------------------------------
+
+*.dll binary
+*.exe binary
+
+############################################################################
+# Misc Filetypes
+############################################################################
+
+# Standard to msysgit ------------------------------------------------------
+
+*.doc diff=astextplain
+*.DOC diff=astextplain
+*.docx diff=astextplain
+*.DOCX diff=astextplain
+*.dot diff=astextplain
+*.DOT diff=astextplain
+*.pdf diff=astextplain
+*.PDF diff=astextplain
+*.rtf diff=astextplain
+*.RTF diff=astextplain
