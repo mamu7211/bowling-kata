@@ -37,21 +37,21 @@ public class GameControllerTests {
 
 	@Test
 	public void ifGameStartedUserIsShownTheThrowingView() {
-		Mockito.stub(gameMock.isFinished()).toReturn(true);
+		setupGameMockToExitsItsLoopAndEndGame();
 		gameController.run();
 		Mockito.verify(throwingViewMock).show();
 	}
 
 	@Test
 	public void ifGameEndedResultVieWShouldBeShown() {
-		Mockito.stub(gameMock.isFinished()).toReturn(true);
+		setupGameMockToExitsItsLoopAndEndGame();
 		gameController.run();
 		Mockito.verify(resultViewMock).show(resultFrames);
 	}
 
 	@Test
 	public void ifGameStartedUserInputIsRequested() throws IOException {
-		Mockito.stub(gameMock.isFinished()).toReturn(true);
+		setupGameMockToExitsItsLoopAndEndGame();
 		gameController.run();
 		Mockito.verify(throwingViewMock).readInput();
 	}
@@ -59,26 +59,32 @@ public class GameControllerTests {
 	@Test
 	public void havingAGameWithTenPinsStandingAndEnteredThreeKnockedWillCallThrowBall()
 			throws IOException {
+		setupGameMockToExitsItsLoopAndEndGame();
 		Mockito.stub(gameMock.getPinsStanding()).toReturn(10);
-		Mockito.stub(throwingViewMock.getPinsKicked()).toReturn(3);
-		Mockito.stub(gameMock.isFinished()).toReturn(true);
+		Mockito.stub(throwingViewMock.getPinsKicked()).toReturn(3);		
 		gameController.run();
 		Mockito.verify(gameMock).throwBall(3);
 	}
 
 	@Test
-	public void foo() throws IOException {
+	public void playerTriesToKnockDownMorePinsThanStandingResultsInNoCheatingMessage() throws IOException {
+		setupGameMockToExitsItsLoopAndEndGame();
 		Mockito.stub(throwingViewMock.getPinsKicked()).toReturn(3);
 		Mockito.stub(gameMock.getPinsStanding()).toReturn(1);
-		Mockito.stub(gameMock.isFinished()).toReturn(true);
 		gameController.run();
 		Mockito.verify(throwingViewMock).showError("No cheating please!");
-	}
+	}	
 
 	@Test
 	public void simulateEndOfGameIfQuitIsRequestedByUser() throws IOException {
+		Mockito.stub(gameMock.isFinished()).toReturn(false);
 		Mockito.stub(throwingViewMock.isQuitGameRequested()).toReturn(true);
 		gameController.run();
-		Mockito.verify(resultViewMock).show(resultFrames);
+		Mockito.verify(resultViewMock).show(resultFrames);		
+	}
+	
+	private void setupGameMockToExitsItsLoopAndEndGame() {
+		//Without this, we're stuck in the game loop
+		Mockito.stub(gameMock.isFinished()).toReturn(true);
 	}
 }
